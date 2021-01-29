@@ -7,12 +7,11 @@ let currentLoc;
 function initialize() {
     //grab previous locations from local storage
     savedLocations = JSON.parse(localStorage.getItem("weathercities"));
-    
-    let lastSearch;
+ 
     //display buttons for previous searches
     if (savedLocations) {
         //get the last city searched so we can display it
-        currentLoc = savedLocations[savedLocations.length - 1];
+        currentLoc = savedLocations(savedLocations.length - 1);
         showPrevious();
         getCurrent(currentLoc);
     }
@@ -178,7 +177,6 @@ function getForecast(city) {
         }
     });
 }
-
 function clear() {
     //clear all the weather
     $("#earthforecast").empty();
@@ -215,19 +213,13 @@ $("#searchbtn").on("click", function () {
     }
 });
 
-$(document).on("click", "#loc-btn", function () {
-    clear();
-    currentLoc = $(this).text();
-    showPrevious();
-    getCurrent(currentLoc);
-});
+let resetButton = document.querySelector("#resetBtn");
+let clearLocation = document.querySelector("#prevSearches");
 
-initialize();
+resetButton.addEventListener("click", clearHistory);
 
-let btnClearEl = document.getElementById("#resetbtn");
-btnClearEl.addEventListener("click", resetbutton )
+function clearHistory(){
+localStorage.removeItem("weathercities");
 
-function resetbutton() {
-    localStorage.removeItem("weathercities");
-  }
-  
+
+}
