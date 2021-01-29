@@ -19,29 +19,37 @@
 </head>
 
 <body>
-    
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-            <i class="material-icons">wb_sunny</i>&nbsp;Weather where you are!</a>
-    </nav>
+
+    <div class="container1">
+         <div class="subcontainer1"> 
+             <img src="./assets/icon.htm">    
+             <h1>Weather App</h1>
+         </div>        
+         <div class="input-group ">
+                    <input type="text" class="form-control" placeholder="Search for a City"
+                       id="searchinput">
+                      <button type="submit" id="searchbtn">Submit</button>
+                
+         </div>
+            
+     </div>
 
    
     <div class="container-fluid">
         <div class="row mt-3">
             <div class="col-md-3 searcharea">
-                <h2 class="text-secondary">Search for a city:</h2>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="searchinput" type="search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" id="searchbtn" type="submit">
-                       <i class="material-icons">search</i>
-                        </button>
-                    </div>
-                </div>
+                <h2 class="text-secondary">View Your History:</h2>
+                
                
                <div class="mt-5" id="prevSearches">
               <!---   Buttons for previous searches here-->
-               </div>
+     
+              </div>
+
+             <div>
+                <button type="click" id="resetbtn">Reset</button>
+             </div>
+
             </div>
 
              <div class="col-md-9">

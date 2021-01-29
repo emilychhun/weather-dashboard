@@ -1,12 +1,14 @@
 
+
   
-var savedLocations = [];
-var currentLoc;
+let savedLocations = [];
+let currentLoc;
 
 function initialize() {
     //grab previous locations from local storage
     savedLocations = JSON.parse(localStorage.getItem("weathercities"));
-    var lastSearch;
+    
+    let lastSearch;
     //display buttons for previous searches
     if (savedLocations) {
         //get the last city searched so we can display it
@@ -28,8 +30,8 @@ function initialize() {
 }
 
 function success(position) {
-    var lat = position.coords.latitude;
-    var lon = position.coords.longitude;
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=7e4c7478cc7ee1e11440bf55a8358ec3";
     $.ajax({
         url: queryURL,
@@ -52,9 +54,9 @@ function showPrevious() {
     //show the previously searched for locations based on what is in local storage
     if (savedLocations) {
         $("#prevSearches").empty();
-        var btns = $("<div>").attr("class", "list-group");
-        for (var i = 0; i < savedLocations.length; i++) {
-            var locBtn = $("<a>").attr("href", "#").attr("id", "loc-btn").text(savedLocations[i]);
+        let btns = $("<div>").attr("class", "list-group");
+        for (let i = 0; i < savedLocations.length; i++) {
+            let locBtn = $("<a>").attr("href", "#").attr("id", "loc-btn").text(savedLocations[i]);
             if (savedLocations[i] == currentLoc){
                 locBtn.attr("class", "list-group-item list-group-item-action active");
             }
@@ -68,7 +70,7 @@ function showPrevious() {
 }
 
 function getCurrent(city) {
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=7e4c7478cc7ee1e11440bf55a8358ec3&units=imperial";
+    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=7e4c7478cc7ee1e11440bf55a8358ec3&units=imperial";
     $.ajax({
         url: queryURL,
         method: "GET",
@@ -79,7 +81,7 @@ function getCurrent(city) {
         }
     }).then(function (response) {
         //create the card
-        var currCard = $("<div>").attr("class", "card bg-light");
+        let currCard = $("<div>").attr("class", "card bg-light");
         $("#earthforecast").append(currCard);
 
         //add location to card header
@@ -222,3 +224,10 @@ $(document).on("click", "#loc-btn", function () {
 
 initialize();
 
+let btnClearEl = document.getElementById("#resetbtn");
+btnClearEl.addEventListener("click", resetbutton )
+
+function resetbutton() {
+    localStorage.removeItem("weathercities");
+  }
+  

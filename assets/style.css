@@ -1,4 +1,20 @@
 
+.container1{
+    display: flex;
+    justify-content: space-between;
+
+}
+.subcontainer1{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+   
+}
+
+.input-group{
+    width: 50%;
+    align-items: center;
+}
 .searcharea {
     background-color: #e6f2ff;
     padding: 20px;
@@ -32,7 +48,9 @@
 }
 
 #searchbtn{
-    padding: 6px 5px 0px 5px;
+    color: blueviolet;
 
 }
-
+button{
+    height: 40px;
+}
