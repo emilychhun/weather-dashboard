@@ -1,7 +1,7 @@
 
- 
- 
- function saveLoc(loc){
+
+
+function saveLoc(loc) {
     //add this to the saved locations array
     if (savedLocations === null) {
         savedLocations = [loc];
@@ -13,14 +13,14 @@
     localStorage.setItem("weathercities", JSON.stringify(savedLocations));
     showPrevious();
 }
-  
+
 let savedLocations = [];
 let currentLoc;
 
 function initialize() {
     //grab previous locations from local storage
     savedLocations = JSON.parse(localStorage.getItem("weathercities"));
- 
+
     //display buttons for previous searches
     if (savedLocations) {
         //get the last city searched so we can display it
@@ -28,15 +28,15 @@ function initialize() {
         showPrevious();
         getCurrent(currentLoc);
     }
-      else {
+    else {
         //try to geolocate, otherwise set city to raleigh
         if (!navigator.geolocation) {
             //can't geolocate and no previous searches, so just give them one
             getCurrent("Raleigh");
         }
-       /* else {
-            navigator.geolocation.getCurrentPosition(success, error);
-        }*/
+        /* else {
+             navigator.geolocation.getCurrentPosition(success, error);
+         }*/
     }
 
 }
@@ -49,62 +49,62 @@ function getCurrent(city) {
     $.ajax({
         url: queryURL,
         method: "GET",
-        error: function (){
+        error: function () {
             savedLocations.splice(savedLocations.indexOf(city), 1);
             localStorage.setItem("weathercities", JSON.stringify(savedLocations));
             initialize();
         }
     }).then(function (response) {
         //create the card
-       
-        
-       let currCard = $("<div>");
+
+
+        let currCard = $("<div>");
         $("#earthforecast").append(currCard);
 
         //add location to card header
-       
-        let currCardHead = $("<div>").attr("class", "test1").text("Your Current Weather at :" );
+
+        let currCardHead = $("<div>").attr("class", "test1").text("Your Current Weather at :");
         currCard.append(currCardHead);
 
-      
-       let cardRow = $("<div>").attr("class", "row ");
+
+        let cardRow = $("<div>").attr("class", "row ");
         $("#earthforecast").append(cardRow);
 
         //get icon for weather conditions
         let iconURL = "https://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png";
 
         let imgDiv = $("<div>").append($("<img>").attr("src", iconURL).attr("class", "card-img"));
-       
+
         cardRow.append(imgDiv);
 
-       
-       
-       
-       
+
+
+
+
         let textDiv = $("<ul>").attr("class", "");
-       
+
         let cardBody = $("<ul>").attr("class", "");
-        
+
         textDiv.append(cardBody);
-        
-        
+
+
         //display city name
         cardBody.append($("<h3>").attr("class", "city-name").text(response.name));
-       
+
         //display last updated
         let currdate = moment(response.dt, "X").format("dddd, MMMM Do YYYY, h:mm a");
         cardBody.append($("<p>").attr("class", "card-text").append($("<small>").attr("class", "text-muted").text("Last updated: " + currdate)));
-       
+
         //display Temperature
         cardBody.append($("<li>").attr("class", "card-text").html("Temperature: " + response.main.temp + " &#8457;"));
-       
+
         //display Humidity
         cardBody.append($("<li>").attr("class", "card-text").text("Humidity: " + response.main.humidity + "%"));
-       
+
         //display Wind Speed
         cardBody.append($("<li>").attr("class", "card-text").text("Wind Speed: " + response.wind.speed + " MPH"));
 
-       
+
         //get UV Index
         let uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid=7e4c7478cc7ee1e11440bf55a8358ec3&lat=" + response.coord.lat + "&lon=" + response.coord.lat;
         $.ajax({
@@ -153,7 +153,7 @@ function getForecast(city) {
         //loop through array response to find the forecasts for 15:00
         for (let i = 0; i < response.list.length; i++) {
             if (response.list[i].dt_txt.indexOf("15:00:00") !== -1) {
-              
+
                 let newCol = $("<div>").attr("class", "one-fifth");
                 newrow.append(newCol);
 
@@ -182,7 +182,7 @@ function showPrevious() {
         let btns = $("<ul>").attr("class", "");
         for (let i = 0; i < savedLocations.length; i++) {
             let locBtn = $("<li>").attr("id", "previous").text(savedLocations[i]);
-            if (savedLocations[i] == currentLoc){
+            if (savedLocations[i] == currentLoc) {
                 locBtn.attr("class", "apple3");
             }
             else {
@@ -240,12 +240,13 @@ $("#resetBtn").on("click", function(){
 let resetBtn = document.querySelector("#resetBtn");
 let clearLocation = document.querySelector("#prevSearches");
 let btns = document.querySelector("#previous");
-let items =document.querySelector(btns.value);
+console.log(btns);
+// let items = document.querySelector(btns.value);
 resetButton.addEventListener("click", clearHistory);
 
-function clearHistory(){
-localStorage.removeItem("weathercities");
-resetBtn.removeChild(items);
+function clearHistory() {
+    localStorage.removeItem("weathercities");
+    resetBtn.removeChild(items);
 
 
 }
