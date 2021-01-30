@@ -68,6 +68,8 @@ function showPrevious() {
     }
 }
 
+
+
 function getCurrent(city) {
     let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=7e4c7478cc7ee1e11440bf55a8358ec3&units=imperial";
     $.ajax({
@@ -80,13 +82,18 @@ function getCurrent(city) {
         }
     }).then(function (response) {
         //create the card
-        let currCard = $("<div>").attr("class", "card bg-light");
+       
+        let currCard = $("<div>").attr("class", "");
         $("#earthforecast").append(currCard);
 
         //add location to card header
-        var currCardHead = $("<div>").attr("class", "card-header").text("Current weather for " + response.name);
-        currCard.append(currCardHead);
+       
+        let currCardHead = $("<div>").attr("class", "").text("Your Current Weather at :" );
+        $("#currCard").append(currCardHead);
 
+      
+      
+      
         var cardRow = $("<div>").attr("class", "row no-gutters");
         currCard.append(cardRow);
 
@@ -99,6 +106,8 @@ function getCurrent(city) {
         var textDiv = $("<div>").attr("class", "col-md-8");
         var cardBody = $("<div>").attr("class", "card-body");
         textDiv.append(cardBody);
+        
+        
         //display city name
         cardBody.append($("<h3>").attr("class", "card-title").text(response.name));
         //display last updated
@@ -111,6 +120,7 @@ function getCurrent(city) {
         //display Wind Speed
         cardBody.append($("<p>").attr("class", "card-text").text("Wind Speed: " + response.wind.speed + " MPH"));
 
+       
         //get UV Index
         var uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid=7e4c7478cc7ee1e11440bf55a8358ec3&lat=" + response.coord.lat + "&lon=" + response.coord.lat;
         $.ajax({
@@ -120,16 +130,16 @@ function getCurrent(city) {
             var uvindex = uvresponse.value;
             var bgcolor;
             if (uvindex <= 3) {
-                bgcolor = "green";
+                bgcolor = "#8B008B";
             }
             else if (uvindex >= 3 || uvindex <= 6) {
-                bgcolor = "yellow";
+                bgcolor = "#006400";
             }
             else if (uvindex >= 6 || uvindex <= 8) {
-                bgcolor = "orange";
+                bgcolor = "#DB7093";
             }
             else {
-                bgcolor = "red";
+                bgcolor = "#B22222";
             }
             var uvdisp = $("<p>").attr("class", "card-text").text("UV Index: ");
             uvdisp.append($("<span>").attr("class", "uvindex").attr("style", ("background-color:" + bgcolor)).text(uvindex));
@@ -213,13 +223,16 @@ $("#searchbtn").on("click", function () {
     }
 });
 
-let resetButton = document.querySelector("#resetBtn");
+let resetBtn = document.querySelector("#resetBtn");
 let clearLocation = document.querySelector("#prevSearches");
-
+let btns = document.querySelector(".list-group");
+let items =document.querySelector(btns.value);
 resetButton.addEventListener("click", clearHistory);
 
 function clearHistory(){
 localStorage.removeItem("weathercities");
+resetBtn.removeChild(items);
 
 
 }
+
