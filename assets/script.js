@@ -70,6 +70,9 @@ function showPrevious() {
 
 
 
+
+
+
 function getCurrent(city) {
     let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=7e4c7478cc7ee1e11440bf55a8358ec3&units=imperial";
     $.ajax({
@@ -83,46 +86,57 @@ function getCurrent(city) {
     }).then(function (response) {
         //create the card
        
-        let currCard = $("<div>").attr("class", "");
+        
+        
+        let currCard = $("<div>");
         $("#earthforecast").append(currCard);
 
         //add location to card header
        
-        let currCardHead = $("<div>").attr("class", "").text("Your Current Weather at :" );
-        $("#currCard").append(currCardHead);
+        let currCardHead = $("<div>").text("Your Current Weather at :" );
+        currCard.append(currCardHead);
 
       
-      
-      
-        var cardRow = $("<div>").attr("class", "row no-gutters");
-        currCard.append(cardRow);
+       let cardRow = $("<div>").attr("class", "row no-gutters");
+        $("#earthforecast").append(cardRow);
 
         //get icon for weather conditions
-        var iconURL = "https://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png";
+        let iconURL = "https://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png";
 
-        var imgDiv = $("<div>").attr("class", "col-md-4").append($("<img>").attr("src", iconURL).attr("class", "card-img"));
+        let imgDiv = $("<div>").attr("class", "col-md-4").append($("<img>").attr("src", iconURL).attr("class", "card-img"));
+       
         cardRow.append(imgDiv);
 
-        var textDiv = $("<div>").attr("class", "col-md-8");
-        var cardBody = $("<div>").attr("class", "card-body");
+       
+       
+       
+       
+        let textDiv = $("<div>").attr("class", "col-md-6");
+       
+        let cardBody = $("<div>").attr("class", "card-body");
+        
         textDiv.append(cardBody);
         
         
         //display city name
         cardBody.append($("<h3>").attr("class", "card-title").text(response.name));
+       
         //display last updated
-        var currdate = moment(response.dt, "X").format("dddd, MMMM Do YYYY, h:mm a");
+        let currdate = moment(response.dt, "X").format("dddd, MMMM Do YYYY, h:mm a");
         cardBody.append($("<p>").attr("class", "card-text").append($("<small>").attr("class", "text-muted").text("Last updated: " + currdate)));
+       
         //display Temperature
         cardBody.append($("<p>").attr("class", "card-text").html("Temperature: " + response.main.temp + " &#8457;"));
+       
         //display Humidity
         cardBody.append($("<p>").attr("class", "card-text").text("Humidity: " + response.main.humidity + "%"));
+       
         //display Wind Speed
         cardBody.append($("<p>").attr("class", "card-text").text("Wind Speed: " + response.wind.speed + " MPH"));
 
        
         //get UV Index
-        var uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid=7e4c7478cc7ee1e11440bf55a8358ec3&lat=" + response.coord.lat + "&lon=" + response.coord.lat;
+        let uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid=7e4c7478cc7ee1e11440bf55a8358ec3&lat=" + response.coord.lat + "&lon=" + response.coord.lat;
         $.ajax({
             url: uvURL,
             method: "GET"
@@ -192,7 +206,8 @@ function clear() {
     $("#earthforecast").empty();
 }
 
-function saveLoc(loc){
+
+ function saveLoc(loc){
     //add this to the saved locations array
     if (savedLocations === null) {
         savedLocations = [loc];
@@ -209,7 +224,7 @@ $("#searchbtn").on("click", function () {
     //don't refresh the screen
     event.preventDefault();
     //grab the value of the input field
-    var loc = $("#searchinput").val().trim();
+    let loc = $("#searchinput").val().trim();
     //if loc wasn't empty
     if (loc !== "") {
         //clear the previous forecast
