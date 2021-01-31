@@ -179,6 +179,31 @@ function showPrevious() {
     //show the previously searched for locations based on what is in local storage
     if (savedLocations) {
         $("#prevSearches").empty();
+        var btns = $("<div>").attr("class", "list-group");
+        for (var i = 0; i < savedLocations.length; i++) {
+            var locBtn = $("<a>").attr("href", "#").attr("id", "loc-btn").text(savedLocations[i]);
+            if (savedLocations[i] == currentLoc) {
+                locBtn.attr("class", "list-group-item list-group-item-action active");
+            }
+            else {
+                locBtn.attr("class", "list-group-item list-group-item-action");
+            }
+            btns.prepend(locBtn);
+        }
+        $("#prevSearches").append(btns);
+    }
+}
+
+
+
+
+
+
+
+/*function showPrevious() {
+    //show the previously searched for locations based on what is in local storage
+    if (savedLocations) {
+        $("#prevSearches").empty();
         let btns = $("<ul>").attr("class", "");
         for (let i = 0; i < savedLocations.length; i++) {
             let locBtn = $("<li>").attr("id", "previous").text(savedLocations[i]);
@@ -192,7 +217,7 @@ function showPrevious() {
         }
         $("#prevSearches").append(btns);
     }
-}
+}*/
 
 
 function clear() {
@@ -219,35 +244,18 @@ $("#searchbtn").on("click", function () {
     }
 });
 
-
-
-/*function clearBtn() {
-    //clear all the weather
-    $("#prevSearches").empty();
-}
-
-$("#resetBtn").on("click", function(){
-    let resetButton = $("#prevSearches").val().trim();
-    if (resetButton !==""){
-        clearBtn();
-        localStorage.removeItem("weathercities");
-        resetBtn.removeChild(items);
-
-    }
-});*/
-
-
 let resetBtn = document.querySelector("#resetBtn");
 let clearLocation = document.querySelector("#prevSearches");
-let btns = document.querySelector("#previous");
-console.log(btns);
-// let items = document.querySelector(btns.value);
-resetButton.addEventListener("click", clearHistory);
+
+resetBtn.addEventListener("click", clearHistory);
 
 function clearHistory() {
     localStorage.removeItem("weathercities");
-    resetBtn.removeChild(items);
-
-
+   
 }
 
+$(document).ready(function(){
+    $("#resetBtn").click(function(){
+        $("li").remove();
+    });
+} );

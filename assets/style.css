@@ -25,7 +25,12 @@
     border: dashed red;
     padding: 30px;
     background-color: royalblue;
+    width: 150px;
+    margin-left: 80px;
+ }
 
+#resetBtn{
+    justify-content: center;
 }
 .input-group{
     width: 50%;
