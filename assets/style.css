@@ -1,51 +1,8 @@
 
-.container1{
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-    margin-bottom: 30px;
-    border:solid black ;
-
-}
-.subcontainer1{
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-   
-}
-.container2{
-    display: flex;
-    justify-content: space-between;
   
-}
-#removebtn{
-   
-    margin-top: 20px;
-    margin-bottom: 30px;
-    border: dashed red;
-    padding: 30px;
-    background-color: royalblue;
-    width: 150px;
-    margin-left: 80px;
- }
-
-#resetBtn{
-    justify-content: center;
-}
-.input-group{
-    width: 50%;
-    align-items: center;
-    background-color: lightblue;
-
-}
-input{
-    margin-left: 30px
-}
 .searcharea {
-    background-color: greenyellow ;
-
-
-    margin-left: 20px;
+    background-color: #e6f2ff;
+    padding: 20px;
 }
 
 .uvindex {
@@ -70,35 +27,13 @@ input{
 
 .forecast {
     display: flex;
-    background-color: #B0C4DE;
-
+    flex-direction: row;
     justify-content: space-between;
     margin: 10px 0px;
 }
 
 #searchbtn{
-    color: blueviolet;
+    padding: 6px 5px 0px 5px;
 
 }
-button{
-    height: 40px;
-}
-.test1{
-    color: blue;
-    margin-left: 250px;
-    font-size: x-large;
-    margin-bottom: 20px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-.city-name{
-    color: #008B8B;
-    align-items: center;
-    margin-left: 50px;
 
-}
-#earthforecast{
-    background-color: wheat;
-    font-family: Arial, Helvetica, sans-serif;
-
-
-}
